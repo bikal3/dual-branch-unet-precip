@@ -19,7 +19,9 @@ export default function About() {
           <a href="https://github.com/ETappert" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:underline">Elisabeth Tappert</a>
           {' '}and{' '}
           <a href="https://github.com/gabdele" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:underline">Gabriela de Leon</a>
-          {' '}for their support throughout this project.
+          {' '}for their support throughout this project — helping with data reprojection,
+          building the input DataLoader pipeline, and rasterising rain gauge station data into
+          training targets.
         </p>
       </div>
     </section>
