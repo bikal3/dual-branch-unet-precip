@@ -7,10 +7,19 @@ describe('Approach', () => {
     expect(screen.getByText(/dual.branch u.?net/i)).toBeInTheDocument();
   });
 
-  it('mentions both branches', () => {
+  it('shows Branch 1 and Branch 2 labels', () => {
     render(<Approach />);
-    expect(screen.getAllByText(/branch 1/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/branch 2/i).length).toBeGreaterThan(0);
+    // The labelled <span> elements
+    const spans = screen.getAllByText(/branch [12]/i);
+    expect(spans.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('renders the architecture diagram in a pre block', () => {
+    render(<Approach />);
+    const pre = screen.getByTestId('arch-diagram');
+    expect(pre).toBeInTheDocument();
+    expect(pre.tagName).toBe('PRE');
+    expect(pre).toHaveTextContent(/Branch 1/);
   });
 
   it('has the correct section id', () => {

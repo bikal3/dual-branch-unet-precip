@@ -9,9 +9,10 @@ describe('Hero', () => {
     );
   });
 
-  it('renders a GitHub link', () => {
+  it('renders a GitHub link to the correct repo', () => {
     render(<Hero />);
     const link = screen.getByRole('link', { name: /github/i });
-    expect(link).toHaveAttribute('href', expect.stringContaining('github.com'));
+    expect(link).toHaveAttribute('href', 'https://github.com/bikal3/precipitation-downsampling');
+    expect(link).toHaveAttribute('rel', expect.stringContaining('noopener'));
   });
 });
