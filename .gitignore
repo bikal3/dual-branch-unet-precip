@@ -10,3 +10,5 @@ build/
 .env
 checkpoints/*.pt
 /data/
+/temp_goes_data/
+/docs/
