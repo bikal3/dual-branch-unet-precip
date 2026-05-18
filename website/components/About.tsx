@@ -13,7 +13,7 @@ export default function About() {
           This project was completed as part of the{' '}
           <strong>ADLEO course</strong>. The goal was to compare three CNN
           architectures — Dual-Branch U-Net, Nested U-Net, and DA-Net — for
-          precipitation downscaling over the Big Island of Hawai&#8216;i.
+          precipitation downscaling over the Big Island of Hawai&#700;i.
         </p>
 
         <h3 className="mt-8 text-xl font-semibold text-gray-800">Team</h3>

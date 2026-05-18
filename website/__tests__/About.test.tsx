@@ -2,9 +2,11 @@ import { render, screen } from '@testing-library/react';
 import About from '@/components/About';
 
 describe('About', () => {
-  it('mentions the author', () => {
+  it('renders all team members', () => {
     render(<About />);
     expect(screen.getByText(/bikal/i)).toBeInTheDocument();
+    expect(screen.getByText(/elisabeth/i)).toBeInTheDocument();
+    expect(screen.getByText(/gabby/i)).toBeInTheDocument();
   });
 
   it('mentions the course', () => {

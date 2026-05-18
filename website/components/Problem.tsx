@@ -13,7 +13,7 @@ export default function Problem() {
           NASA's IMERG satellite product provides global daily precipitation
           estimates, but at a coarse 0.1° resolution (~10&nbsp;km per pixel).
           This resolution is too coarse to capture the fine-scale rainfall
-          gradients driven by Hawai&#8216;i's complex topography — a single
+          gradients driven by Hawai&#700;i's complex topography — a single
           pixel can span everything from a coastal rain shadow to a windward
           summit receiving over 10 meters of rain per year.
         </p>
@@ -23,7 +23,7 @@ export default function Problem() {
           <strong>250&nbsp;m resolution</strong>, using high-resolution
           topographic data (elevation, slope, aspect) and GOES-17 cloud cover as
           auxiliary inputs. Ground-truth supervision comes from ~165 rain gauge
-          stations operated by the Hawai&#8216;i Climate Data Portal (HCDP).
+          stations operated by the Hawai&#700;i Climate Data Portal (HCDP).
         </p>
         <div className="mt-8 overflow-x-auto">
           <table className="min-w-full text-sm border border-gray-200">

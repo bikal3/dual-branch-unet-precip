@@ -10,7 +10,7 @@ export default function Hero() {
       <p className="mt-4 max-w-2xl text-lg text-gray-300">
         Using a Dual-Branch U-Net CNN to downscale NASA IMERG satellite
         precipitation from 10&nbsp;km to 250&nbsp;m resolution over the Big
-        Island of Hawai&#8216;i.
+        Island of Hawai&#700;i.
       </p>
       <div className="mt-8 flex gap-4">
         <a

@@ -15,7 +15,7 @@ interface DemoProps {
 
 export default function Demo({ basePath }: DemoProps) {
   const [selectedDate, setSelectedDate] = useState(SAMPLE_DATES[0].value);
-  const [opacity, setOpacity] = useState(1);
+  const [opacity, setOpacity] = useState(0.5);
 
   return (
     <section id="demo" className="bg-gray-50 py-20 px-6">

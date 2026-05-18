@@ -40,4 +40,10 @@ describe('Demo', () => {
     const { container } = render(<Demo basePath={BASE_PATH} />);
     expect(container.querySelector('#demo')).not.toBeNull();
   });
+
+  it('updates opacity when the slider changes', () => {
+    render(<Demo basePath={BASE_PATH} />);
+    fireEvent.change(screen.getByRole('slider'), { target: { value: '0.5' } });
+    expect(screen.getByTestId('demo-map')).toHaveAttribute('data-opacity', '0.5');
+  });
 });
