@@ -2,16 +2,16 @@ import { render, screen } from '@testing-library/react';
 import About from '@/components/About';
 
 describe('About', () => {
-  it('renders all team members', () => {
+  it('renders special thanks with GitHub links', () => {
     render(<About />);
-    expect(screen.getByText(/bikal/i)).toBeInTheDocument();
-    expect(screen.getByText(/elisabeth/i)).toBeInTheDocument();
-    expect(screen.getByText(/gabby/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /elisabeth tappert/i })).toHaveAttribute('href', 'https://github.com/ETappert');
+    expect(screen.getByRole('link', { name: /gabriela de leon/i })).toHaveAttribute('href', 'https://github.com/gabdele');
   });
 
-  it('mentions the course', () => {
+  it('describes the project', () => {
     render(<About />);
-    expect(screen.getByText(/adleo/i)).toBeInTheDocument();
+    expect(screen.getByText(/IMERG/)).toBeInTheDocument();
+    expect(screen.getByText(/250\s*m/i)).toBeInTheDocument();
   });
 
   it('renders the section heading', () => {

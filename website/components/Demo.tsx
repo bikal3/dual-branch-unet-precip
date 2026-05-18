@@ -60,7 +60,7 @@ export default function Demo({ basePath }: DemoProps) {
         </div>
 
         {/* Map */}
-        <div className="mt-4 rounded-md overflow-hidden border border-gray-200">
+        <div className="mt-4 rounded-md overflow-hidden border border-gray-200" style={{ isolation: 'isolate' }}>
           <DemoMap date={selectedDate} opacity={opacity} basePath={basePath} />
         </div>
 
