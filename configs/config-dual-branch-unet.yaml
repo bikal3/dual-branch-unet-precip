@@ -1,0 +1,20 @@
+data:
+  hawaii_bbox:
+    min_lon: -160.5
+    max_lon: -154.5
+    min_lat: 18.5
+    max_lat: 22.5
+  imerg_dir: ../data/IMERG
+  modis_dir: ../data/MODIS
+  station_csv_dir: ../data/HCDP_data/rainfall/new/day/statewide/partial/station_data
+  dem_path: ../data/elevation/geostack_30m_topo.tif
+  cache_dir: ../data/cache
+  goes_dir: ../data/GOES
+
+training:
+  train_years: [2020]
+  val_months: { year: 2021, start_month: 1, end_month: 3 } # Jan–Mar 2021
+  test_months: { year: 2021, start_month: 4, end_month: 6 } # Apr–Jun 2021
+  patch_size: 64
+  batch_size: 32
+  num_workers: 0

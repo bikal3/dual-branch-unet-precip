@@ -60,7 +60,7 @@ def tile_inference(
     device: torch.device,
 ) -> np.ndarray:
     """Tile the full raster into 32×32 chips, run inference, stitch back."""
-    C, H, W = raster.shape
+    _, H, W = raster.shape
     pad_h = (CHIP_SIZE - H % CHIP_SIZE) % CHIP_SIZE
     pad_w = (CHIP_SIZE - W % CHIP_SIZE) % CHIP_SIZE
     padded = np.pad(raster, ((0, 0), (0, pad_h), (0, pad_w)), mode="reflect")
