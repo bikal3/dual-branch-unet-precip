@@ -1,29 +1,101 @@
-# precipitation-downsampling
-Project for ADLEO course.  Using a CNN to downscale IMERG precipitation data.
+# Dual-Branch U-Net Precipitation Downsampling
 
-Project Summary
-The goal of this project is to use a convolution neural network model to downscale IMERG near-real time precipitation data from 10 km resolution to 250 m resolution.  The area of focus is the Big Island of Hawaii.  The temporal frequency is daily over a 5 year period from 2015 to 2019. We will look at 2 different CNN architectures to compare accuracy.  The architectures are i) Dual-Branch U-Net, ii) Nested U-Net, and iii) DA-Net.
+Downscales NASA IMERG daily precipitation from 10 km to 250 m resolution over the Big Island of Hawai'i using a dual-branch convolutional neural network that fuses satellite rainfall data with high-resolution topographic inputs.
 
-CNN inputs
-- IMERG daily precipitation: | NASA IMERG Early Run V07B | Daily precipitation (mm) | 0.1° (~10 km) | Global | PPS HTTPS (auth required) |
-- elevation: | SRTM/DEM | Elevation (m) | 30 m | Hawaii | Pre-downloaded |
-- slope: | SRTM/DEM | Elevation (m) | 30 m | Hawaii | Pre-downloaded |
-- aspect: | SRTM/DEM | Elevation (m) | 30 m | Hawaii | Pre-downloaded |
-- cloud cover: | MODIS MOD09GA v061 (Terra) | Cloud state (state_1km_1 band) | 1 km | Global daily | NASA Earthdata LP DAAC |
+**Live demo:** [bikal3.github.io/dual-branch-unet-precip](https://bikal3.github.io/dual-branch-unet-precip)
 
-CNN Target
--daily rainfall station: | HCDP Station CSVs | Daily rain gauge observations (mm) | Point (~165 stations) | Hawaii statewide | HCDP public API |
+---
 
-Loss Function: Mean Squared Error
+## Overview
 
-Tasks:
--  Data aquisition code (Bikal)
--  Reproject precipitation and cloud cover to match extent(Big Island) and resolution of DEM (Elisabeth)
--  rasterize station data with non-station pixel masked (Gabby)
--  Dataloader, add rotation and flip augmentation, normalization (Elisabeth)
--  CNN1, Dual-Branch U-Net(Bikal)
--  CNN2, Nested U-Net(Gabby)
--  CNN3, DA-Net(Elisabeth)
--  Analysis of CNN with validation data, the year 2020. RMSE, MAE, Pearson(All)
--  Compare model output to HCDP interpolated rainfall map, difference maps, distribution, RMSE(All)
-  
+NASA's IMERG product provides global daily precipitation at 10 km resolution — too coarse to capture the steep rainfall gradients caused by Hawai'i's volcanic terrain. This project trains a Dual-Branch U-Net to learn the statistical relationship between coarse satellite precipitation and fine-scale ground truth from ~165 rain gauge stations, producing 250 m daily rainfall fields.
+
+## Model Architecture
+
+The model uses two independent encoder branches that each compress a 32×32 input chip to 4×4 feature maps, which are then concatenated and decoded back to 32×32:
+
+- **Branch 1** — IMERG precipitation + GOES cloud brightness temperature (2 channels)
+- **Branch 2** — DEM elevation, slope, and aspect (3 channels)
+- **Bottleneck** — 256-channel fusion of both branches
+- **Decoder** — three transposed convolution upsampling stages → 1-channel output
+
+**Loss function:** station-masked MSE (λ₁ = 1.0) + total variation regularisation (λ₂ = 0.1)
+
+## Data Sources
+
+| Source | Description |
+|--------|-------------|
+| NASA IMERG | Daily precipitation at 0.1° (~10 km) |
+| GOES BCM | Cloud brightness temperature (cloud mask) |
+| DEM | 30 m elevation, slope, and aspect stack |
+| HCDP | ~165 rain gauge stations for training supervision |
+
+**Splits:** train 2020 · val Jan–Mar 2021 · test Apr–Jun 2021
+
+## Repository Structure
+
+```
+├── src/
+│   ├── models/
+│   │   └── unet.py              # DualBranchUNet + DualBranchLoss
+│   └── training/
+│       ├── load_dataset.py      # Dataset + chip sampler
+│       ├── process_data.py      # Input preprocessing pipeline
+│       ├── create_csv.py        # Build file_paths.csv index
+│       └── train-dual-branch-unet.py  # Training script
+├── configs/
+│   └── config-dual-branch-unet.yaml  # Data paths and training config
+├── scripts/
+│   └── export_samples.py        # Export demo PNGs for the website
+├── notebooks/
+│   ├── data-preprocessing.ipynb
+│   └── dual_branch_unet.ipynb
+├── models/
+│   └── dual_branch_unet.pth     # Trained checkpoint
+└── website/                     # Next.js portfolio site
+```
+
+## Training
+
+```bash
+python src/training/train-dual-branch-unet.py
+```
+
+Key options:
+
+```
+--epochs       Number of training epochs       (default: 50)
+--batch-size   Batch size                       (default: 64)
+--lr           Learning rate                    (default: 1e-3)
+--lambda-mse   Masked MSE loss weight           (default: 1.0)
+--lambda-tv    Total variation loss weight      (default: 0.1)
+--chip-size    Spatial chip size in pixels      (default: 32)
+```
+
+The best checkpoint is saved to `models/dual_branch_unet.pth` and a loss curve is written to `docs/loss_curve.png`.
+
+## Exporting Demo Samples
+
+Generates viridis PNGs of IMERG input and model prediction for three sample dates, used by the interactive website demo:
+
+```bash
+python scripts/export_samples.py
+```
+
+Output: `website/public/samples/YYYY-MM-DD/{imerg,pred}.png`
+
+## Website
+
+A static Next.js 14 portfolio site deployed to GitHub Pages with an interactive Leaflet map for comparing raw IMERG input against the model prediction.
+
+```bash
+cd website
+npm install
+npm run dev        # local development
+npm run build      # production build
+npm run deploy     # deploy to GitHub Pages
+```
+
+## Acknowledgements
+
+Special thanks to [Elisabeth Tappert](https://github.com/ETappert) and [Gabriela de Leon](https://github.com/gabdele) for their support throughout this project.
