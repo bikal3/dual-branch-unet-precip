@@ -1,7 +1,7 @@
 const ARCH_DIAGRAM = `
 Input (B, 5, 32, 32)
         │
-        ├─── Br-1 (IMERG + GOES, 2 ch) ─── Br-2 (Topo, 3 ch) ──────────┐
+        ├─── Branch 1 (IMERG + GOES, 2 ch) ─── Branch 2 (Topo, 3 ch) ───┐
         │    ConvBlock(2→32) → Pool              ConvBlock(3→32) → Pool   │
         │    ConvBlock(32→64) → Pool             ConvBlock(32→64) → Pool  │
         │    ConvBlock(64→128) → Pool            ConvBlock(64→128) → Pool │

@@ -4,7 +4,7 @@ import Problem from '@/components/Problem';
 describe('Problem', () => {
   it('mentions IMERG and resolution', () => {
     render(<Problem />);
-    expect(screen.getByText(/IMERG/)).toBeInTheDocument();
+    expect(screen.getAllByText(/IMERG/).length).toBeGreaterThan(0);
     expect(screen.getByText(/250\s*m/i)).toBeInTheDocument();
   });
 

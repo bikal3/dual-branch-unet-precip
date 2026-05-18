@@ -9,8 +9,8 @@ describe('Approach', () => {
 
   it('mentions both branches', () => {
     render(<Approach />);
-    expect(screen.getByText(/branch 1/i)).toBeInTheDocument();
-    expect(screen.getByText(/branch 2/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/branch 1/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/branch 2/i).length).toBeGreaterThan(0);
   });
 
   it('has the correct section id', () => {

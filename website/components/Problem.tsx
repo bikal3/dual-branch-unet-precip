@@ -4,10 +4,10 @@ export default function Problem() {
       <div className="mx-auto max-w-3xl">
         <h2 className="text-3xl font-bold text-gray-900">The Problem</h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          NASA&apos;s satellite precipitation product provides global daily
+          NASA's IMERG satellite product provides global daily precipitation
           estimates, but at a coarse 0.1° resolution (~10&nbsp;km per pixel).
           This resolution is too coarse to capture the fine-scale rainfall
-          gradients driven by Hawai&#8216;i&apos;s complex topography — a single
+          gradients driven by Hawai&#8216;i's complex topography — a single
           pixel can span everything from a coastal rain shadow to a windward
           summit receiving over 10 meters of rain per year.
         </p>
