@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  basePath: '/precipitation-downsampling',
-  assetPrefix: '/precipitation-downsampling/',
+  basePath: '/dual-branch-unet-precip',
+  assetPrefix: '/dual-branch-unet-precip/',
   images: { unoptimized: true },
 };
 
