@@ -13,7 +13,7 @@ export default function NavBar() {
         <span className="font-semibold text-sm tracking-wide">
           Precipitation Downsampling
         </span>
-        <ul className="flex gap-6 text-sm">
+        <ul className="hidden sm:flex gap-6 text-sm">
           {LINKS.map(({ label, href }) => (
             <li key={href}>
               <a href={href} className="hover:text-blue-400 transition-colors">

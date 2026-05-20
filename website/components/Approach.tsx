@@ -42,7 +42,7 @@ export default function Approach() {
         <h3 className="mt-8 text-xl font-semibold text-gray-800">
           Architecture
         </h3>
-        <pre data-testid="arch-diagram" className="mt-3 overflow-x-auto rounded-md bg-gray-900 p-4 text-xs leading-relaxed text-green-300">
+        <pre data-testid="arch-diagram" className="mt-3 w-full overflow-x-auto rounded-md bg-gray-900 p-4 text-xs leading-relaxed text-green-300">
           {ARCH_DIAGRAM}
         </pre>
 
