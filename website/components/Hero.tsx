@@ -12,6 +12,17 @@ export default function Hero() {
         precipitation from 10&nbsp;km to 250&nbsp;m resolution over the Big
         Island of Hawai&#700;i.
       </p>
+      <p className="mt-3 text-sm text-gray-400">
+        By{' '}
+        <a
+          href="https://bikal3.com.np/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-gray-200 hover:text-white hover:underline transition-colors"
+        >
+          Bikal Shrestha
+        </a>
+      </p>
       <div className="mt-8 flex gap-4">
         <a
           href="https://github.com/bikal3/dual-branch-unet-precip"
