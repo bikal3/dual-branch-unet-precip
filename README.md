@@ -1,4 +1,4 @@
-# Dual-Branch U-Net Precipitation Downsampling
+# Dual-Branch U-Net Precipitation Downscaling
 
 Downscales NASA IMERG daily precipitation from 10 km to 250 m resolution over the Big Island of Hawai'i using a dual-branch convolutional neural network that fuses satellite rainfall data with high-resolution topographic inputs.
 

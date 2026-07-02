@@ -5,7 +5,7 @@ export default function Hero() {
       className="flex flex-col items-center justify-center bg-gray-950 py-28 px-6 text-center text-white"
     >
       <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-        Precipitation Downsampling
+        Precipitation Downscaling
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-gray-300">
         Using a Dual-Branch U-Net CNN to downscale NASA IMERG satellite

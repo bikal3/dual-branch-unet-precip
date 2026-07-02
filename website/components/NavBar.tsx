@@ -11,7 +11,7 @@ export default function NavBar() {
     <nav className="sticky top-0 z-50 bg-gray-900 text-white shadow-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
         <span className="font-semibold text-sm tracking-wide">
-          Precipitation Downsampling
+          Precipitation Downscaling
         </span>
         <ul className="hidden sm:flex gap-6 text-sm">
           {LINKS.map(({ label, href }) => (
