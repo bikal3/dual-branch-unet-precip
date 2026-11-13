@@ -8,16 +8,16 @@ Downscales NASA IMERG daily precipitation from 10 km to 250 m resolution over th
 
 ## Overview
 
-NASA's IMERG product provides global daily precipitation at 10 km resolution — too coarse to capture the steep rainfall gradients caused by Hawai'i's volcanic terrain. This project trains a Dual-Branch U-Net to learn the statistical relationship between coarse satellite precipitation and fine-scale ground truth from ~165 rain gauge stations, producing 250 m daily rainfall fields.
+NASA's IMERG product provides global daily precipitation at 10 km resolution, which is too coarse to capture the steep rainfall gradients caused by Hawai'i's volcanic terrain. This project trains a Dual-Branch U-Net to learn the statistical relationship between coarse satellite precipitation and fine-scale ground truth from ~165 rain gauge stations, producing 250 m daily rainfall fields.
 
 ## Model Architecture
 
 The model uses two independent encoder branches that each compress a 32×32 input chip to 4×4 feature maps, which are then concatenated and decoded back to 32×32:
 
-- **Branch 1** — IMERG precipitation + GOES cloud brightness temperature (2 channels)
-- **Branch 2** — DEM elevation, slope, and aspect (3 channels)
-- **Bottleneck** — 256-channel fusion of both branches
-- **Decoder** — three transposed convolution upsampling stages → 1-channel output
+- **Branch 1**: IMERG precipitation + GOES cloud brightness temperature (2 channels)
+- **Branch 2**: DEM elevation, slope, and aspect (3 channels)
+- **Bottleneck**: 256-channel fusion of both branches
+- **Decoder**: three transposed convolution upsampling stages → 1-channel output
 
 **Loss function:** station-masked MSE (λ₁ = 1.0) + total variation regularisation (λ₂ = 0.1)
 
